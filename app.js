@@ -9,8 +9,6 @@ var productsRouter = require("./routes/products");
 var usersRouter = require("./routes/users");
 var session = require("express-session");
 var sessionAuth = require("./middlewares/sessionAuth");
-var _=require("lodash");
-
 var app = express();
 app.use(session({ secret: "keyboard cat", cookie: { maxAge: 60000 } }));
 // view engine setup
@@ -43,9 +41,11 @@ app.use(function (err, req, res, next) {
   res.render("error");
 });
 
-const uri = "mongodb+srv://sefi123:sefi12345@sefi1.rud7y.mongodb.net/Faculty?retryWrites=true&w=majority";
-
-
-mongoose.connect(uri, {useNewUrlParser : true , useUnifiedTopology: true}).then(() => console.log("Connected!!!!!")).catch((error) => console.log(error.message));
-
+mongoose
+  .connect("mongodb+srv://sefi123:sefi12345@sefi1.rud7y.mongodb.net/Faculty?retryWrites=true&w=majority", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("Connected to Mongo...."))
+  .catch((error) => console.log(error.message));
 module.exports = app;
